@@ -1,11 +1,11 @@
 package com.neoteric.webclientdemo.reactivedemo;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.util.concurrent.CompletableFuture;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserService userService;
@@ -13,13 +13,13 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping("/users")
-    public CompletableFuture<String> getUsers() {
-        return userService.fetchUsersConcurrently();
+    @GetMapping()
+    public Flux<User> getUsers() {
+        return  userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public CompletableFuture<User> getUser(@PathVariable Long id) {
+    public Mono<User> getUser(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 }

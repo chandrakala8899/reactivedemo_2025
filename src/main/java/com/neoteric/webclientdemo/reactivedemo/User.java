@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "user",schema = "userDetails")
+@Table(name = "user",schema = "userdetails")
 public class User {
 
     @Id
@@ -22,5 +22,5 @@ public class User {
         this.email = email;
     }
 
-    // Getters and Setters
+
 }
